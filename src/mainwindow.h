@@ -5,6 +5,10 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QtDebug>
+#include <QDragEnterEvent>
+#include <QDropEvent>
+#include <QMimeData>
+#include <QPainter>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -39,6 +43,16 @@ private:
     uint32_t addrStart, addrStop;
     uint32_t addrInsert;
 
+    QVector <QByteArray> firmwareStack;
+
+    int rectX = 180, rectY = 280;
+
     bool GenerateFile();
+    void dragEnterEvent(QDragEnterEvent *event);
+    void dropEvent(QDropEvent *event);
+    void mousePressEvent(QMouseEvent *event);
+
+protected:
+    void paintEvent(QPaintEvent *);
 };
 #endif // MAINWINDOW_H
